@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <style media="screen">
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+      
+      table.purpleTable {
+        border: 2px solid #875a7b;
+        background-color: #f5e6f3; /* Light background color for the table */
+        width: 100%;
+        text-align: center;
+        border-collapse: collapse;
+        font-family: 'Poppins', sans-serif;
+        border-radius: 7px; /* Added border radius */
+        overflow: hidden; /* To apply border radius to table */
+      }
+      table.purpleTable td,
+      table.purpleTable th {
+        border: 1px solid #b59c9b;
+        padding: 3px 2px;
+      }
+      table.purpleTable tbody td {
+        font-size: 13px;
+      }
+      table.purpleTable tr:nth-child(even) {
+        background: #e5d8e0;
+      }
+      table.purpleTable thead {
+        background: #875a7b;
+      }
+      table.purpleTable thead th {
+        font-size: 19px;
+        font-weight: bold;
+        color: #ffffff;
+        text-align: center;
+        border-left: 2px solid #875a7b;
+      }
+      table.purpleTable thead th:first-child {
+        border-left: none;
+      }
+      table.purpleTable tfoot {
+        font-size: 13px;
+        font-weight: bold;
+        color: #ffffff;
+        background: #875a7b;
+      }
+      table.purpleTable tfoot td {
+        font-size: 13px;
+      }
+      table.purpleTable tfoot .links {
+        text-align: right;
+      }
+      table.purpleTable tfoot .links a {
+        display: inline-block;
+        background: #ffffff;
+        color: #875a7b;
+        padding: 2px 8px;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+
+  <body>
+    {% include 'library/navbaradmin.html' %}
+    <br />
+    <br />
+    <h3 class="p-3 mb-2" style="background-color: #875A7B; color: #ffffff; font-size: 50px; text-align:center; font-family: 'Poppins', sans-serif;">Available Books in Library!</h3>
+
+    {% if books %}
+      <table class="purpleTable">
+        <thead>
+          <tr>
+            <th>Book Name</th>
+            <th>ISBN</th>
+            <th>Author</th>
+            <th>Category</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <td colspan="4">
+              <div class="links"></div>
+            </td>
+          </tr>
+        </tfoot>
+        <tbody>
+          {% for book in books %}
+            <tr>
+              <td>{{ book.name }}</td>
+              <td>{{ book.isbn }}</td>
+              <td>{{ book.author }}</td>
+              <td>{{ book.category }}</td>
+              <td>
+                <form action="{% url 'delete_book' book.id %}" method="post" style="display: inline;">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-delete">Delete</button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <h1>No books available</h1>
+    {% endif %}
+
+    <br /><br /><br /><br /><br /><br /><br /><br /><br />
+    {% include 'library/footer.html' %}
+  </body>
+</html>

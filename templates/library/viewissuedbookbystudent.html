@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+      
+      table.purpleTable {
+        border: 2px solid #875A7B;
+        background-color: #eaf2f8;
+        width: 100%;
+        text-align: center;
+        border-collapse: collapse;
+        font-family: 'Poppins', sans-serif;
+        border-radius: 7px; /* Added border radius */
+        overflow: hidden; /* To apply border radius to table */
+      }
+      table.purpleTable td, table.purpleTable th {
+        border: 1px solid #a9c6ea;
+        padding: 3px 2px;
+      }
+      table.purpleTable tbody td {
+        font-size: 13px;
+      }
+      table.purpleTable tr:nth-child(even) {
+        background: #d0e4f5;
+      }
+      table.purpleTable thead {
+        background: #875A7B;
+      }
+      table.purpleTable thead th {
+        font-size: 19px;
+        font-weight: bold;
+        color: #ffffff;
+        text-align: center;
+        border-left: 2px solid #875A7B;
+      }
+      table.purpleTable thead th:first-child {
+        border-left: none;
+      }
+      table.purpleTable tfoot {
+        font-size: 13px;
+        font-weight: bold;
+        color: #ffffff;
+        background: #875A7B;
+      }
+      table.purpleTable tfoot td {
+        font-size: 13px;
+      }
+      table.purpleTable tfoot .links {
+        text-align: right;
+      }
+      table.purpleTable tfoot .links a {
+        display: inline-block;
+        background: #ffffff;
+        color: #875A7B;
+        padding: 2px 8px;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    {% include "library/navbarstudent.html" %}<br><br>
+    <h3 class="p-3 mb-2" style="background-color: #875A7B; color: #FFFFFF; font-size: 50px; text-align:center; font-family: 'Poppins', sans-serif;">Books Issued to You!</h3>
+
+    <div class="row">
+      <div class="col-lg-6" style="padding-right:0px;">
+        {% if li1 %}
+          <table class="purpleTable">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Enrollment</th>
+                <th>Branch</th>
+                <th>Book Name</th>
+                <th>Book Author</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <td colspan="5">
+                  <div class="links"></div>
+                </td>
+              </tr>
+            </tfoot>
+            <tbody>
+              {% for t in li1 %}
+                <tr>
+                  <td>{{t.0}}</td>
+                  <td>{{t.1}}</td>
+                  <td>{{t.2}}</td>
+                  <td>{{t.3}}</td>
+                  <td>{{t.4}}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="col-lg-6" style="padding-left:0px;">
+          <table class="purpleTable">
+            <thead>
+              <tr>
+                <th>Issue Date</th>
+                <th>Expiry Date</th>
+                <th>Fine</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <td colspan="3">
+                  <div class="links"></div>
+                </td>
+              </tr>
+            </tfoot>
+            <tbody>
+              {% for t in li2 %}
+                <tr>
+                  <td>{{t.0}}</td>
+                  <td>{{t.1}}</td>
+                  <td>{{t.2}}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        {% else %}
+          <h1>No book issued to you</h1>
+        {% endif %}
+      </div>
+    </div>
+
+    <br><br><br><br><br><br><br><br><br>
+    {% include "library/footer.html" %}
+  </body>
+</html>

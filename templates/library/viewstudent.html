@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <style media="screen">
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+      
+      table.purpleTable {
+        border: 2px solid #875a7b;
+        background-color: #eee7db;
+        width: 100%;
+        text-align: center;
+        border-collapse: collapse;
+        font-family: 'Poppins', sans-serif;
+        border-radius: 7px;
+      }
+      table.purpleTable td,
+      table.purpleTable th {
+        border: 1px solid #aaaaaa;
+        padding: 3px 2px;
+      }
+      table.purpleTable tbody td {
+        font-size: 13px;
+      }
+      table.purpleTable tr:nth-child(even) {
+        background: #d5c5d8;
+      }
+      table.purpleTable thead {
+        background: #875a7b;
+      }
+      table.purpleTable thead th {
+        font-size: 19px;
+        font-weight: bold;
+        color: #ffffff;
+        text-align: center;
+        border-left: 2px solid #875a7b;
+      }
+      table.purpleTable thead th:first-child {
+        border-left: none;
+      }
+      table.purpleTable tfoot {
+        font-size: 13px;
+        font-weight: bold;
+        color: #ffffff;
+        background: #875a7b;
+      }
+      table.purpleTable tfoot td {
+        font-size: 13px;
+      }
+      table.purpleTable tfoot .links {
+        text-align: right;
+      }
+      table.purpleTable tfoot .links a {
+        display: inline-block;
+        background: #ffffff;
+        color: #875a7b;
+        padding: 2px 8px;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    {% include 'library/navbaradmin.html' %}
+    <br />
+    <br />
+    <h3 class="p-3 mb-2" style="background-color: #875A7B; color: #FFFFFF; font-size: 50px; text-align:center; font-family: 'Poppins', sans-serif;">Student registered in Library!</h3>
+
+    {% if students %}
+      <table class="purpleTable">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Enrollment</th>
+            <th>Branch</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <td colspan="3">
+              <div class="links"></div>
+            </td>
+          </tr>
+        </tfoot>
+        <tbody>
+          {% for s in students %}
+            <tr>
+              <td>{{ s.get_name }}</td>
+              <td>{{ s.enrollment }}</td>
+              <td>{{ s.branch }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <h1>No Student Registered in Library</h1>
+    {% endif %}
+
+    <br /><br /><br /><br /><br /><br />
+    <br /><br /><br />
+    {% include 'library/footer.html' %}
+  </body>
+</html>
